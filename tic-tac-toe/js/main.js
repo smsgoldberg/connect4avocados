@@ -25,16 +25,16 @@ let winner // null || 1 || -1 || 'T'  (these are your end states)
 
 /*----functions----*/
 
-init() //called at the very beginning of the game, this game initializes the game with starting values
+initializeGame() //called at the very beginning of the game, this game initializes the game with starting values
 
-function init() {
+function initializeGame() {
   //set the initial values for our state variables
   turn = 1
   winner = null
 
   //your board array is made up of other arrays
   board = [
-    [0, 0, 0], //col 0
+    [0, 0, 0], //col 0 - remember that this is zero-indexed! 
     [0, 0, 0] // col 1
     [0, 0, 0] // col 2
   ]
@@ -42,5 +42,12 @@ function init() {
   render();
 }
 
+//the render() function displays changes if and when they are relevant 
+function render() {
+
+}
+
 /*-----event listeners----*/
-playAgainButton.addEventListener('click')
+
+//clicking the "play again button" allows the user to replay the game
+playAgainButton.addEventListener('click', initializeGame()) 
