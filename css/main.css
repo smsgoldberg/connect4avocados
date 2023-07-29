@@ -5,7 +5,7 @@
 body {
     display: flex;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
     font-family: 'Raleway', sans-serif;
     height: 100vh;
     margin: 0;
@@ -13,7 +13,7 @@ body {
 
 header {
     color:darkgray;
-    font-size:6vmin;
+    font-size: 6vmin;
     letter-spacing: 2vmin;
 }
 
@@ -23,7 +23,7 @@ h2 {
 }
 
 #markers {
-    display: grid;
+  display: grid;
   grid-template-columns: repeat(7, 10vmin);
   gap: 1vmin;
   margin-top: 1vmin;
@@ -38,16 +38,22 @@ h2 {
   transition: transform 150ms ease-in;
 }
 
+#markers>div:hover {	
+    border-top-color: darkgrey;	
+    transform: scale(0.9);	
+    transition: transform 150ms ease-in;	
+}
+
 #board {
     display: grid;
     grid-template-columns: repeat(7, 10vmin);
     grid-template-rows: repeat(6, 10vmin);
-    gap: 1vmin
-    margin-top: 1vmin;
+    gap: 1vmin;
+    margin-top: -2vmin;
 }
 
 #board>div {
-    border: 0.1vmin  solid grey;
+    border: 0.1vmin solid grey;
     border-radius: 50%;
 }
 
@@ -56,7 +62,8 @@ button {
     border-radius: 2vmin;
     font-size: 4vmin;
     margin-top: 4vmin;
-    color: darkgrey;
+    color: grey;
+    margin-bottom: 4vmin;
 }
 
 button:hover {

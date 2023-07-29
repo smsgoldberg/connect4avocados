@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+    background-color: black;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Raleway', sans-serif;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+h2 {
+    font-size: 3vmin;
+    font-family:'Press Start 2P', cursive;
+    color: hotpink;
+    margin-top: 50px;
+
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 20vmin);
+    grid-template-rows: repeat(3, 20vmin);
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#board > div {
+    display: grid;
+    border: 0.5vmin solid lime;
+    box-shadow:  
+    10px 10px 40px 10px lime,
+    0 0 2px 10px #6EDF45,
+    0 0 2px 2px floralwhite;
+}
+
+button {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    border: 0.5vmin solid hotpink;
+    padding: 20px;
+    box-shadow: 10px 10px 40px 10px hotpink;
+}
