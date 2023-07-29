@@ -44,10 +44,39 @@ function initializeGame() {
 
 //the render() function displays changes if and when they are relevant 
 function render() {
+    
+    //render the board
+    renderBoard()
 
+    //render any mesages
+    renderMessages()
+
+    renderControls()
+
+}
+
+
+function renderBoard() {
+
+}
+
+function renderMessages() {
+
+}
+
+function renderControls() {
+    
 }
 
 /*-----event listeners----*/
 
 //clicking the "play again button" allows the user to replay the game
 playAgainButton.addEventListener('click', initializeGame()) 
+
+
+
+/*---- sound effects------*/
+//this section is just me testing an effect - we'll comment it out if necessary
+
+//this audio is the start sound and should be heard whenever the player clicks the play again button
+let startSound = new Audio('audio/mixkit-retro-game-notification-212.wav')
