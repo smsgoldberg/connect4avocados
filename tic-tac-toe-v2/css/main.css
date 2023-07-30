@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     background-color: black;
+    font-family: 'Press Start 2P', cursive;
 }
 
 body {
@@ -48,6 +49,10 @@ h2 {
     10px 10px 40px 10px lime,
     0 0 2px 10px #6EDF45,
     0 0 2px 2px floralwhite;
+    color: white;
+    text-align: center;
+    font-size: 70px;
+    padding: 25px;
 }
 
 button {
@@ -61,3 +66,4 @@ button {
     padding: 20px;
     box-shadow: 10px 10px 40px 10px hotpink;
 }
+
