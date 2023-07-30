@@ -58,6 +58,9 @@ function initializeGame() {
     winner = 0;
     board =  [null, null, null, null, null, null, null, null, null];
     render();
+    //testing an old-school arcade loading noise -- ideally I'd like to add a toggle so the page is automatically muted and the user can 
+    //engage sounds at will 
+    arcadeLoad();
 }
 
 function render() {
@@ -104,9 +107,36 @@ function renderBoard() {
 }
 
 function renderMessage() {
+  //if message is a tie
+  if (winner === 'T') {
+    messageBoard.innerText = 'Tie';
+  } else if (winner) {
+    messageEl.innerHTML = `
+    <span style="color: ${COLORS[winner]}">
+        ${COLORS[winner].toUpperCase()}
+    </span>, VICTORY IS YOURS!
+`
 
+  } else {
+    messageEl.innerHTML = `
+    <span style="color: ${COLORS[turn]}">
+        ${COLORS[turn].toUpperCase()}
+    </span>'s turn!
+`
+  }
 }
 
 function renderControls() {
 
+    //toggles playAgainButton on/off
+    playAgainButton.style.visibility = winner ? visible: 'hidden';
+
+
+}
+
+/*-- sound effects --*/
+
+function arcadeLoad() {
+let startSound = new Audio('audio/mixkit-arcade-game-opener-222.wav');
+startSound.play();
 }
