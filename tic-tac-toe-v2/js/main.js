@@ -1,5 +1,11 @@
 /*----constants---*/
- COLORS = {
+PLAYERS = {
+    0: null, 
+    1: "Player 1",
+   '-1': "Player 2"
+}
+
+COLORS = {
     0: null,
     1: '#00F1FF',
    '-1': '#ffd319'
@@ -27,6 +33,7 @@ let winner //represents 3 different possibilities -- a winner, a tie, or a game 
 let squareEls;
 let playAgainButton;
 let messageBoard;
+//let startSound = new Audio('audio/mixkit-arcade-game-opener-222.wav');
 
 //this particular event listener was added because the JS was loading faster than the DOM and causing null errors
 document.addEventListener('DOMContentLoaded', function () {
@@ -42,6 +49,7 @@ squareEls = [...document.querySelectorAll('.cells')];
 
 //enables player to reset the board for a new game
 playAgainButton.addEventListener('click', initializeGame);
+//playAgainButton.addEventListener('click', arcadeLoad);
 
 //allows the player to click on a square cell to make a move
 document.getElementById('board').addEventListener('click', playerMove);
@@ -53,14 +61,15 @@ document.getElementById('board').addEventListener('click', playerMove);
 initializeGame();
 
 function initializeGame() {
+   // startSound.load();
     //let's set our initial state variables 
     player = 1
-    winner = 0;
+    winner = null;
     board =  [null, null, null, null, null, null, null, null, null];
     render();
     //testing an old-school arcade loading noise -- ideally I'd like to add a toggle so the page is automatically muted and the user can 
     //engage sounds at will 
-    arcadeLoad();
+   // arcadeLoad();
 }
 
 function render() {
@@ -83,8 +92,10 @@ function playerMove(event) {
     //which player the square belongs to
     board[squareIdx] = player;
     console.log('this is board', board)
+    checkWinner();
+    checkTie();
+    console.log('this is winner', winner)
     player *= -1;
-
     render()
 }
 
@@ -96,7 +107,7 @@ function renderBoard() {
       if (cell === 1) {
         squareEls[cellIdx].innerText = 'X';
         squareEls[cellIdx].style.color = COLORS[1];
-    } else if (cell===-1) {
+    } else if (cell=== -1) {
         squareEls[cellIdx].innerText = 'O';
         squareEls[cellIdx].style.color = COLORS['-1'];
     } else {
@@ -109,18 +120,18 @@ function renderBoard() {
 function renderMessage() {
   //if message is a tie
   if (winner === 'T') {
-    messageBoard.innerText = 'Tie';
+    messageBoard.innerText = 'It\'s A Tie!';
   } else if (winner) {
-    messageEl.innerHTML = `
+    messageBoard.innerHTML = `
     <span style="color: ${COLORS[winner]}">
-        ${COLORS[winner].toUpperCase()}
+        ${PLAYERS[winner].toUpperCase()}
     </span>, VICTORY IS YOURS!
 `
 
   } else {
-    messageEl.innerHTML = `
-    <span style="color: ${COLORS[turn]}">
-        ${COLORS[turn].toUpperCase()}
+    messageBoard.innerHTML = `
+    <span style="color: ${COLORS[player]}">
+        ${PLAYERS[player].toUpperCase()}
     </span>'s turn!
 `
   }
@@ -129,14 +140,55 @@ function renderMessage() {
 function renderControls() {
 
     //toggles playAgainButton on/off
-    playAgainButton.style.visibility = winner ? visible: 'hidden';
+   playAgainButton.style.visibility = winner ? 'visible': 'hidden';
 
 
+}
+
+function checkWinner() {
+ 
+ //this one checks *all* combos for a winner
+ winningCombos.forEach((combo) => {
+    console.log("combo is ", combo)
+ compareComboToBoard(combo);
+ })
+ 
+}
+
+function compareComboToBoard(combo) {
+//this function compares the state of the board to a combo
+  //ex. board = [1, null, null, 1, -1, null, 1, -1, null]
+  //ex. combo = [0, 3, 6]
+//    combo.forEach((boardIdx) => {
+    //check for non-winning conditions
+    for (boardIdx of combo) {
+        console.log("player is ", player)
+        console.log("boardIdx is ", boardIdx)
+        console.log("board[boardIdx] is ", board[boardIdx])
+     if (board[boardIdx] !== player) {
+        return;
+     } 
+    }
+//    })
+   //if the loop hasn't terminated, then we have a winning condition 
+    winner = player;
+}
+
+function checkTie() {
+   if (winner) {
+    return;
+   }
+    for (boardIdx of board) {
+        if (boardIdx === null) {
+            return;
+        }
+    } 
+    winner = 'T';
 }
 
 /*-- sound effects --*/
 
-function arcadeLoad() {
-let startSound = new Audio('audio/mixkit-arcade-game-opener-222.wav');
+/*function arcadeLoad() {
+//startSound.load();
 startSound.play();
-}
+}*/
